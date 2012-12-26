@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(:version => 20121224204406) do
     t.float    "latitude"
     t.float    "longitude"
     t.text     "description"
+    t.string   "address"
+    t.boolean  "gmaps"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end

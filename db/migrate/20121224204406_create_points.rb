@@ -4,7 +4,8 @@ class CreatePoints < ActiveRecord::Migration
       t.float :latitude
       t.float :longitude
       t.text :description
-
+      t.string :address
+      t.boolean :gmaps
       t.timestamps
     end
   end

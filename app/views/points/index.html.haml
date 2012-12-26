@@ -1,1 +1,8 @@
-Hello World
+= gmaps4rails(@json)
+- content_for :scripts do
+  -#%script{:type=>"text/javascript", :charset=>"utf-8"}
+    var markersArray = [];
+    Gmaps.map.callback = function() {google.maps.event.addListener(Gmaps.map.serviceObject,'click',function(event) {
+    alert(event.latLng);
+    });
+    };
