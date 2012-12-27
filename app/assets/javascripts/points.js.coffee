@@ -9,20 +9,20 @@
 
 $ ->
   markersArray = []
-#  On click, clear markers, place a new one, update coordinates in the form
+  # On click, clear markers, place a new one, update coordinates in the form
   Gmaps.map.callback = ->
       google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
-#        clearOverlays()
+        clearOverlays()
         placeMarker(event.latLng)
         updateFormLocation(event.latLng))
 
-#  Update form attributes with given coordinates
+  # Update form attributes with given coordinates
   updateFormLocation = (latLng) ->
       $('#location_attributes_latitude').val(latLng.lat())
       $('#location_attributes_longitude').val(latLng.lng())
       $('#location_attributes_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom())
 
-#  Add a marker with an open infowindow
+  # Add a marker with an open infowindow
   placeMarker = (latLng) ->
       marker = new google.maps.Marker(
           position: latLng
@@ -30,17 +30,24 @@ $ ->
           draggable: true
       )
       markersArray.push(marker)
-#      Set and open infowindow
+      # Set and open infowindow
+      $('#popup-form .coords p').text(latLng)
+#      $.ajax(
+#        url: '/get_address'
+#        type: 'POST'
+#        data: latLng
+#      ).done = (data) ->
+#        alert data
       infowindow = new google.maps.InfoWindow(
-          content: '<div class="popup"><h2>Awesome!</h2><p>Drag me and adjust the zoom level.</p>'
+          content: $('#popup-form').html()
       )
       infowindow.open(Gmaps.map.serviceObject,marker)
-#      Listen to drag & drop
+      # Listen to drag & drop
       google.maps.event.addListener(marker, 'dragend', ->
           updateFormLocation(this.getPosition())
       )
 
-#  Removes the overlays from the map
+  # Removes the overlays from the map
   clearOverlays = ->
     if markersArray?
       for i in markersArray
