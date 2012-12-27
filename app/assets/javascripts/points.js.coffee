@@ -31,15 +31,10 @@ $ ->
       )
       markersArray.push(marker)
       # Set and open infowindow
-      $('#popup-form .coords p').text(latLng)
-#      $.ajax(
-#        url: '/get_address'
-#        type: 'POST'
-#        data: latLng
-#      ).done = (data) ->
-#        alert data
+#      $('#popup-form .coords p').text(latLng)
+
       infowindow = new google.maps.InfoWindow(
-          content: $('#popup-form').html()
+          content: get_content(latLng)
       )
       infowindow.open(Gmaps.map.serviceObject,marker)
       # Listen to drag & drop
@@ -47,9 +42,22 @@ $ ->
           updateFormLocation(this.getPosition())
       )
 
+  get_content = (latLng) ->
+    $.ajax(
+      url: '/get_address'
+      type: 'POST'
+      data: "latLng="+latLng
+    ).success (data) ->
+      window.address = data
+    '<p>' + window.address + '</p>'
+  #    $('#popup-form .coords p').text(window.address)
+  #    $('#popup-form').html()
+
   # Removes the overlays from the map
   clearOverlays = ->
     if markersArray?
       for i in markersArray
         i.setMap(null)
     markersArray.length = 0
+
+

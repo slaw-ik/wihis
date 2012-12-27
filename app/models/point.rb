@@ -1,6 +1,6 @@
 class Point < ActiveRecord::Base
 
-  acts_as_gmappable :process_geocoding => true
+  acts_as_gmappable :process_geocoding => true, :validation => false
   before_create :address_presence
 
 
@@ -20,6 +20,7 @@ class Point < ActiveRecord::Base
   private
 
   def address_presence
-    Point.acts_as_gmappable :process_geocoding => !self.address.blank?
+    Point.acts_as_gmappable :process_geocoding => !self.address.blank?, :validation => false
+    return true
   end
 end
