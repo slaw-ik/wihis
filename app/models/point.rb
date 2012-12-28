@@ -1,10 +1,13 @@
 class Point < ActiveRecord::Base
 
+  validates :description, :presence => true
+
   acts_as_gmappable :process_geocoding => true, :validation => false
   before_create :address_presence
 
 
-  attr_accessible :address, :gmaps, :description, :latitude, :longitude
+  attr_accessible :address, :gmaps, :description, :latitude, :longitude, :no_geocode
+  attr_accessor :no_geocode
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :reverse_geocode
@@ -20,7 +23,7 @@ class Point < ActiveRecord::Base
   private
 
   def address_presence
-    Point.acts_as_gmappable :process_geocoding => !self.address.blank?, :validation => false
+    Point.acts_as_gmappable :process_geocoding => !self.address.blank? && !self.no_geocode, :validation => false
     return true
   end
 end

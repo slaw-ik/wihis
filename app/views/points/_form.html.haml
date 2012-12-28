@@ -1,0 +1,9 @@
+= simple_form_for @point, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :latitude
+  = f.input :longitude
+  = f.input :description
+  = f.input :address
+  = f.input :gmaps
+  .form-actions
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), points_path, :class => 'btn'

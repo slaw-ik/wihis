@@ -10,6 +10,7 @@ gem 'mysql2'
 gem 'thin'
 gem 'gmaps4rails'
 gem 'geocoder'
+gem "twitter-bootstrap-rails"
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -2,8 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.coords {
-  height: 50px;
-  border: 1px solid black;
+.popup {
+  //height: 500px;
   width: 500px;
+  input{
+    width: 480px;
+  }
 }
