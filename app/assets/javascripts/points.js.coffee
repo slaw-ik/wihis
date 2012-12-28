@@ -14,6 +14,7 @@ $ ->
       google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
         clearOverlays()
         placeMarker(event.latLng)
+        get_content(event.latLng)
         updateFormLocation(event.latLng))
 
   # Update form attributes with given coordinates
@@ -34,7 +35,7 @@ $ ->
 #      $('#popup-form .coords p').text(latLng)
 
       infowindow = new google.maps.InfoWindow(
-          content: get_content(latLng)
+          content: $('#popup-form').html()
       )
       infowindow.open(Gmaps.map.serviceObject,marker)
       # Listen to drag & drop
@@ -48,9 +49,7 @@ $ ->
       type: 'POST'
       data: "latLng="+latLng
     ).success (data) ->
-      window.address = data
-    '<p>' + window.address + '</p>'
-  #    $('#popup-form .coords p').text(window.address)
+      $('.coords p').text(data)
   #    $('#popup-form').html()
 
   # Removes the overlays from the map
