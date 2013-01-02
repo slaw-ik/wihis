@@ -1,5 +1,7 @@
 class Point < ActiveRecord::Base
 
+  has_and_belongs_to_many :tags
+
   validates :description, :presence => true
 
   acts_as_gmappable :process_geocoding => true, :validation => false

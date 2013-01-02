@@ -1,13 +1,6 @@
 = gmaps4rails(@json)
-- content_for :scripts do
-  -#%script{:type=>"text/javascript", :charset=>"utf-8"}
-    var markersArray = [];
-    Gmaps.map.callback = function() {google.maps.event.addListener(Gmaps.map.serviceObject,'click',function(event) {
-    alert(event.latLng);
-    });
-    };
 
-#popup-form{:style => "display:none"}
+#popup-form{:style => "display:block; z-index:999; position:absolute;"}
   .popup
     = form_for @point do |f|
       %header
@@ -16,8 +9,14 @@
         = f.hidden_field :latitude
         = f.hidden_field :longitude
         = f.hidden_field :address
-        %p
+
+        .control-group
+          = f.label :tags
+          .controls
+            = collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
+        .control-group
           = f.label :description
-          = f.text_field :description
-      %button{:class => 'btn btn-primary'}
+          .controls
+            = f.text_field :description
+      %button{:class => 'btn btn-primary', :onclick => 'validate_form()'}
         Create Point

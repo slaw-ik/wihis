@@ -3,31 +3,10 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-#  Gmaps.map.HandleDragend = (pos) ->
-#    geocoder = new google.maps.Geocoder()
-#    geocoder.geocode
-#      latLng: pos
-#    , (responses) ->
-#      if responses and responses.length > 0
-#        alert responses[0].formatted_address
-#      else
-#        alert "Cannot determine address at this location."
-
+  $(".chzn-select").chosen();
   markersArray = []
   # On click, clear markers, place a new one, update coordinates in the form
   Gmaps.map.callback = ->
-#      i = 0
-#      while i < @markers.length
-#        google.maps.event.addListener Gmaps.map.markers[i].serviceObject, "dragend", ->
-#          Gmaps.map.HandleDragend @getPosition()
-#        ++i
-#      google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
-#        clearOverlays()
-#        placeMarker(event.latLng)
-#        get_content(event.latLng)
-#        updateFormLocation(event.latLng))
-
-
       google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
         clearOverlays()
         placeMarker(event.latLng)
@@ -54,10 +33,8 @@ $ ->
           content: $('#popup-form').html()
       )
       infowindow.open(Gmaps.map.serviceObject,marker)
-      # Listen to drag & drop
-      google.maps.event.addListener(marker, 'dragend', ->
-          updateFormLocation(this.getPosition())
-      )
+      validate_form()
+#      $(".chzn-select").chosen();
 
   get_address = (latLng) ->
     $.ajax(
@@ -76,3 +53,32 @@ $ ->
     markersArray.length = 0
 
 
+#Form validations
+#$(document).ready ->
+#  $("#new_point").validate()
+@validate_form = ->
+  $(".map_container #new_point").validate
+    rules:
+      "user[email]":
+        email: true
+        required: true
+
+      "point[description]":
+        required: true
+        minlength: 6
+
+      "user[password_confirmation]":
+        minlength: 6
+        required: true
+        equalTo: "#user_password"
+
+    highlight: (label) ->
+      $(label).closest(".control-group").addClass "error"
+
+    success: (label) ->
+      label.text("OK!").addClass("valid").closest(".control-group").addClass "success"
+
+
+
+#todo
+# try to implement another Tgs plugin http://tagedit.webwork-albrecht.de/
