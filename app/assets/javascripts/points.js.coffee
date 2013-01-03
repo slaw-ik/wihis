@@ -3,44 +3,51 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $(".chzn-select").chosen();
+  #  $(".chzn-select").chosen();
+  #  $('input.tag').tagedit(
+  #    autocompleteURL: '/tags_autocomplete'
+  #  )
   markersArray = []
   # On click, clear markers, place a new one, update coordinates in the form
   Gmaps.map.callback = ->
-      google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
-        clearOverlays()
-        placeMarker(event.latLng)
-        get_address(event.latLng)
-        updateFormLocation(event.latLng))
+    google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
+      clearOverlays()
+      placeMarker(event.latLng)
+      get_address(event.latLng)
+      updateFormLocation(event.latLng)
+      apply_tagging()
+    )
 
   # Update form attributes with given coordinates
   updateFormLocation = (latLng) ->
-      $('section #point_latitude').val(latLng.lat())
-      $('section #point_longitude').val(latLng.lng())
-      $('#location_attributes_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom())
+    $('section #point_latitude').val(latLng.lat())
+    $('section #point_longitude').val(latLng.lng())
+    $('#location_attributes_gmaps_zoom').val(Gmaps.map.serviceObject.getZoom())
 
   # Add a marker with an open infowindow
   placeMarker = (latLng) ->
-      marker = new google.maps.Marker(
-          position: latLng
-          map: Gmaps.map.serviceObject
-          draggable: false
-      )
-      markersArray.push(marker)
-      # Set and open infowindow
+    marker = new google.maps.Marker(
+      position: latLng
+      map: Gmaps.map.serviceObject
+      draggable: false
+    )
+    markersArray.push(marker)
+    # Set and open infowindow
 
-      infowindow = new google.maps.InfoWindow(
-          content: $('#popup-form').html()
-      )
-      infowindow.open(Gmaps.map.serviceObject,marker)
-      validate_form()
-#      $(".chzn-select").chosen();
+    infowindow = new google.maps.InfoWindow(
+      content: $('#popup-form').html()
+    )
+    infowindow.open(Gmaps.map.serviceObject, marker)
+    validate_form()
+
+  #      $(".chzn-select").chosen();
+
 
   get_address = (latLng) ->
     $.ajax(
       url: '/get_address'
       type: 'POST'
-      data: "latLng="+latLng
+      data: "latLng=" + latLng
     ).success (data) ->
       $('h4.address').text(data)
       $('section #point_address').val(data)
@@ -78,6 +85,11 @@ $ ->
     success: (label) ->
       label.text("OK!").addClass("valid").closest(".control-group").addClass "success"
 
+@apply_tagging = ->
+  $('.map_container input.tag').tagedit(
+    autocompleteURL: '/tags_autocomplete'
+  )
+#  alert "haha"
 
 
 #todo

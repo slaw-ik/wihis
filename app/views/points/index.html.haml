@@ -1,5 +1,6 @@
 = gmaps4rails(@json)
 
+-##popup-form{:style => "display:none"}
 #popup-form{:style => "display:block; z-index:999; position:absolute;"}
   .popup
     = form_for @point do |f|
@@ -13,7 +14,9 @@
         .control-group
           = f.label :tags
           .controls
-            = collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
+            -#= collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
+            -#= f.text_field :tags, :class => 'tag'
+            %input{:type => "text", :name => 'point[tag][]', :value => "Hazel Grouse", :class => "tag"}
         .control-group
           = f.label :description
           .controls

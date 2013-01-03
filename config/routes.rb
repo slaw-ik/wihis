@@ -4,6 +4,7 @@ Wihis::Application.routes.draw do
   resources :points
 
   post '/get_address' => "points#get_address"
+  get '/tags_autocomplete' => "tags#autocomplete"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
