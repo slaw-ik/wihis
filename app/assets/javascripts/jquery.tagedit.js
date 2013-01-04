@@ -96,6 +96,20 @@
 
 		var elements = this;
 
+        console.log(elements);
+
+        var a = [];
+        var b = [];
+        $($(elements).get().reverse()).each(function(index, value){
+         if ($.inArray($(value).val(), a) == -1){
+          a.push($(value).val());
+          b.push(value);
+         }
+        });
+        elements = $($(b).get().reverse());
+
+        console.log(elements);
+
 		var baseNameRegexp = new RegExp("^(.*)\\[([0-9]*?("+options.deletedPostfix+"|"+options.addedPostfix+")?)?\]$", "i");
 
 		var baseName = elements.eq(0).attr('name').match(baseNameRegexp);
