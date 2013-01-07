@@ -96,8 +96,8 @@
 
 		var elements = this;
 
-        console.log(elements);
-
+//        console.log(elements);
+//========================= fix for GoogleMaps==================================================
         var a = [];
         var b = [];
         $($(elements).get().reverse()).each(function(index, value){
@@ -108,7 +108,8 @@
         });
         elements = $($(b).get().reverse());
 
-        console.log(elements);
+//        console.log(elements);
+//================================================================================================
 
 		var baseNameRegexp = new RegExp("^(.*)\\[([0-9]*?("+options.deletedPostfix+"|"+options.addedPostfix+")?)?\]$", "i");
 
@@ -192,7 +193,8 @@
 									// Make a new tag in front the input
 									html = '<li class="tagedit-listelement tagedit-listelement-old">';
 									html += '<span dir="'+options.direction+'">' + $(this).val() + '</span>';
-									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[]';
+									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[0-a]';
+                                    console.log(name)
 									html += '<input type="hidden" name="'+name+'" value="'+$(this).val()+'" />';
 									html += '<a class="tagedit-close" title="'+options.texts.removeLinkTitle+'">x</a>';
 									html += '</li>';
