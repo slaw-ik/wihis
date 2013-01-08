@@ -20,5 +20,9 @@ class PointsController < ApplicationController
     #  redirect_to :action => :index
     #  return
     #end
+
+  #  =======================================
+  #
+  #  Tag.find(:all, :conditions => ['tags.id not in (?)',Point.first.tags.find(:all, :select => 'tags.id').uniq.map {|x| x.id}] )
   end
 end

@@ -193,8 +193,9 @@
 									// Make a new tag in front the input
 									html = '<li class="tagedit-listelement tagedit-listelement-old">';
 									html += '<span dir="'+options.direction+'">' + $(this).val() + '</span>';
-									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[0-a]';
-                                    console.log(name)
+//									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[0-a]';
+									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName.slice(0, (baseName.length-1))+"-n]" + '[]';
+                                    console.log(baseName)
 									html += '<input type="hidden" name="'+name+'" value="'+$(this).val()+'" />';
 									html += '<a class="tagedit-close" title="'+options.texts.removeLinkTitle+'">x</a>';
 									html += '</li>';

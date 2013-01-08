@@ -16,8 +16,9 @@
           .controls
             -#= collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
             -#= f.text_field :tags, :class => 'tag'
-            %input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
-            %input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
+            %input{:type => "text", :name => 'point[tag][]', :value => "", :class => "tag"}
+            -#%input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
+            -#%input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
         .control-group
           = f.label :description
           .controls

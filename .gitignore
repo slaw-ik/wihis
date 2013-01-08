@@ -12,6 +12,7 @@
 
 # bundler state
 /.bundle
+/*.lock
 /vendor/bundle/
 /vendor/ruby/
 
