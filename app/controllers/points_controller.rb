@@ -10,16 +10,15 @@ class PointsController < ApplicationController
   end
 
   def create
-    data = params[:point]
-    #data[:no_geocode] = true
-    #@point = Point.new data
-    #if @point.save
-    #  redirect_to :action => :index
-    #  return
-    #else
-    #  redirect_to :action => :index
-    #  return
-    #end
+    @point = Point.prepare_parameters(params[:point])
+
+    if @point.save
+      redirect_to :action => :index
+      return
+    else
+      redirect_to :action => :index
+      return
+    end
 
   #  =======================================
   #

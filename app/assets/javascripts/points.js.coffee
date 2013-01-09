@@ -89,6 +89,7 @@ $ ->
   $('.map_container input.tag').tagedit(
     autocompleteURL: '/tags_autocomplete'
     addedPostfix: ''
+    allowEdit: false
   )
 #  alert "haha"
 
