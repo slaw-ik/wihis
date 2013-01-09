@@ -1,7 +1,13 @@
 class TagsController < ApplicationController
   def autocomplete
-    params
-    render :text => '[{"id":"3","label":"Hazel Grouse","value":"Hazel Grouse"},
-{"id":"4","label":"Common Quail","value":"Common Quail"}]'
+    result = Tag.where("name like ?", '%'+params[:term]+'%')
+    text = []
+    result.each do |el|
+      text << {:id => "#{el.id}",
+               :label => el.name,
+               :value => el.name
+      }
+    end
+    render :text => text.to_json
   end
 end
