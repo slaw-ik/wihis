@@ -1,6 +1,7 @@
 class Point < ActiveRecord::Base
 
   has_and_belongs_to_many :tags
+  has_many :activities
 
   validates :description, :presence => true
   #validates :tags, :uniqueness => true
@@ -19,28 +20,37 @@ class Point < ActiveRecord::Base
     address
   end
 
-  def gmaps4rails_infowindow
-    "<h4>#{address}</h4>"
-  end
+  #def gmaps4rails_infowindow
+  #  "<h4>#{address}</h4>"
+  #end
 
   def self.prepare_parameters(data)
 
-    exist_tag_ids = data[:tag].keys unless data[:tag].blank?
-    new_tags = data[:"tag-n"] unless data[:'tag-n'].blank?
-
     n_tags = []
-    new_tags.each do |tag|
-      n_tags << Tag.new(:name => tag)
+    ex_tags = []
+    tags = []
+
+    unless data[:'tag-n'].blank?
+      new_tags = data[:"tag-n"]
+      new_tags.each do |tag|
+        n_tags << Tag.new(:name => tag)
+      end
+      tags += n_tags
     end
 
-    ex_tags = Tag.where('id in (?)', exist_tag_ids)
+    unless data[:tag].blank?
+      exist_tag_ids = data[:tag].keys
+      exist_tag_names = data[:tag].values
+      ex_tags = Tag.where('id in (?)', exist_tag_ids)
+      tags += exist_tag_names
+    end
 
     data[:no_geocode] = true
     data[:tags] = n_tags + ex_tags
     data.delete(:tag)
     data.delete(:'tag-n')
 
-    return self.new data
+    return {:point => self.new(data), :tags => tags.join(', ')}
 
     #todo
     #  need to refactor

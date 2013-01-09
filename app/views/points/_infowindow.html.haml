@@ -1,0 +1,12 @@
+%h4
+  = point.address
+%h5
+  Description:
+  = point.description
+
+.control-group
+  %h5
+    Tags
+  .controls
+    - point.tags.each do |tag|
+      %input{:type => "text", :name => "point[tag][#{tag.id}]", :value => "#{tag.name}", :class => "tag"}

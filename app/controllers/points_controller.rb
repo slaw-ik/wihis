@@ -1,7 +1,7 @@
 class PointsController < ApplicationController
   def index
     @point = Point.new
-    @json = Point.all.to_gmaps4rails
+    @json = build_map(Point.all)
   end
 
   def get_address
@@ -10,9 +10,11 @@ class PointsController < ApplicationController
   end
 
   def create
-    @point = Point.prepare_parameters(params[:point])
+    data = Point.prepare_parameters(params[:point])
+    @point = data[:point]
 
     if @point.save
+      Activity.leave(current_user.id, @point.id, data[:tags])
       redirect_to :action => :index
       return
     else
@@ -20,8 +22,28 @@ class PointsController < ApplicationController
       return
     end
 
-  #  =======================================
-  #
-  #  Tag.find(:all, :conditions => ['tags.id not in (?)',Point.first.tags.find(:all, :select => 'tags.id').uniq.map {|x| x.id}] )
+    #  =======================================
+    #
+    #  Tag.find(:all, :conditions => ['tags.id not in (?)',Point.first.tags.find(:all, :select => 'tags.id').uniq.map {|x| x.id}] )
   end
+
+
+  private
+
+  def build_map(collection, options = {})
+    collection.to_gmaps4rails do |point, marker|
+      marker.infowindow render_to_string(:partial => "points/infowindow", :locals => {:point => point})
+      #marker.title "#{city.name}"
+      #marker.json({ :population => city.population})
+      #options[:status] = point.status.blank? ? options[:status] : nil
+      #status_dir = options[:status].blank? ? point.status : (point.status.blank? ? options[:status] : point.status)
+      #width = options[:width].blank? ? 32 : options[:width]
+      #height = options[:height].blank? ? 37 : options[:height]
+      #marker.picture({:picture => "/assets/markers/#{status_dir}/pin-export.png",
+      #                :width => width,
+      #                :height => height})
+    end
+  end
+
+
 end

@@ -17,6 +17,15 @@ $ ->
       updateFormLocation(event.latLng)
       apply_tagging()
     )
+    for marker in Gmaps.map.markers
+      google.maps.event.addListener(marker.serviceObject, 'click', (event) ->
+        #      clearOverlays()
+        #      placeMarker(event.latLng)
+        #      get_address(event.latLng)
+        #      updateFormLocation(event.latLng)
+              apply_tagging()
+#        alert("azazaz")
+      )
 
   # Update form attributes with given coordinates
   updateFormLocation = (latLng) ->
