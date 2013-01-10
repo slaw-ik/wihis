@@ -5,26 +5,29 @@
   %div{:class => "popup ui-widget"}
     = form_for @point do |f|
       %header
-        %h4.address
+        .address
+          %h5.address
       %section
         = f.hidden_field :latitude
         = f.hidden_field :longitude
         = f.hidden_field :address
 
         .control-group
-          = f.label :tags
           .controls
             -#= collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
             -#= f.text_field :tags, :class => 'tag'
+            .pholder
+              Add tags
             %input{:type => "text", :name => 'point[tag][]', :value => "", :class => "tag"}
             -#%input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
             -#%input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
         .control-group
-          = f.label :description
+          = f.label :comments
           .controls
-            = f.text_field :description
-      %button{:class => 'btn btn-primary', :onclick => 'validate_form()'}
-        Create Point
+            = f.text_area :description ,:rows => 4, :cols => 50, :style => "width: 398px; height: 95px;resize: none;"
+      .pos      
+        %button{:class => 'btn btn-primary', :onclick => 'validate_form()' }
+          Create Point
 
 
 -#-------------------------------------------------------

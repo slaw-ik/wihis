@@ -3,9 +3,26 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .popup {
-  height: 300px;
-  width: 500px;
+  min-height: 350px;
+  min-width: 500px; 
+  max-height: 350px;
+  max-width: 500px;
   input{
     width: 400px;
   }
+}
+
+.pholder{
+	margin-left: 10px;
+    margin-top: 5px;
+    position: absolute;
+    color: gray;
+}
+
+.pos{
+	margin-left: 314px;
+}
+
+.address{
+	width:370px;
 }

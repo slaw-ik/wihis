@@ -220,6 +220,9 @@
 										// delete Last Tag
 										var elementToRemove = elements.find('li.tagedit-listelement-old').last();
 										elementToRemove.fadeOut(options.animSpeed, function() {elementToRemove.remove();})
+										if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
+											$('.pholder').show();	
+										}
 										event.preventDefault();
 										return false;
 									}
@@ -256,7 +259,13 @@
 						.blur(function() {
 							if($(this).val().length == 0) {
 								// disable the field to prevent sending with the form
+								if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
+									$('.pholder').show();	
+								}
+								
+								
 								$(this).attr('disabled', 'disabled').addClass('tagedit-input-disabled');
+
 							}
 							else {
 								// Delete entry after a timeout
@@ -278,6 +287,9 @@
 						case 'A':
 							$(event.target).parent().fadeOut(options.animSpeed, function() {
 								$(event.target).parent().remove();
+								if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
+									$('.pholder').show();	
+								}
 								});
 							break;
 						case 'INPUT':
@@ -292,6 +304,7 @@
 							$(this).find('#tagedit-input')
 								.removeAttr('disabled')
 								.removeClass('tagedit-input-disabled')
+
 								.focus();
 					}
 					return false;

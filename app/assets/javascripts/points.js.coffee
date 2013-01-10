@@ -58,7 +58,7 @@ $ ->
       type: 'POST'
       data: "latLng=" + latLng
     ).success (data) ->
-      $('h4.address').text(data)
+      $('.address h5.address').text(data)
       $('section #point_address').val(data)
 
   # Removes the overlays from the map
@@ -100,6 +100,11 @@ $ ->
     addedPostfix: ''
     allowEdit: false
   )
+
+  $('.pholder').click ->
+    $(this).hide()
+    $('.tagedit-list').trigger('click') 
+
 #  alert "haha"
 
 
