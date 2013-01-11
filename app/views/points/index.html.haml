@@ -18,12 +18,12 @@
           .controls
             .pholder
               #def_text
-                Add tags
+                Add tags  
             %input{:type => "text", :name => 'point[tag][]', :value => "", :class => "tag"}
         .control-group
           = f.label :comments
           .controls
-            = f.text_area :description ,:rows => 4, :cols => 50, :style => "width: 398px; height: 95px;resize: none;"
+            = f.text_area :description ,:rows => 4, :cols => 50, :style => "width: 482px; height: 95px;resize: none;"
       .pos      
         %button{:class => 'btn btn-primary', :onclick => 'validate_form()' }
           Create Point
