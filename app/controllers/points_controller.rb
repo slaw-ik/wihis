@@ -11,11 +11,19 @@ class PointsController < ApplicationController
 
   def create
     data = Point.prepare_parameters(params[:point])
+    puts params[:point]
     @point = data[:point]
 
     if @point.save
       Activity.leave(current_user.id, @point.id, data[:tags])
-      redirect_to :action => :index
+      @json = build_map([@point])
+      @center = {:longitude => params[:point]["longitude"], :latitude => params[:point]["latitude"] }
+
+      respond_to do |format|
+        format.html{redirect_to :action => :index}
+        format.js
+      end
+
       return
     else
       redirect_to :action => :index

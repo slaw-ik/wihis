@@ -1,9 +1,8 @@
 = gmaps4rails(@json)
 
--##popup-form{:style => "display:block; z-index:999; position:absolute;"}
 #popup-form{:style => "display:none"}
   %div{:class => "popup ui-widget"}
-    = form_for @point do |f|
+    = form_for @point, :remote => true do |f|
       %header
         .coordinates  
           %div.latitude
@@ -17,14 +16,10 @@
          
         .control-group
           .controls
-            -#= collection_select :point, :tags, Tag.all, :id, :name, {}, :multiple => true, :class => 'chzn-select'
-            -#= f.text_field :tags, :class => 'tag'
             .pholder
               #def_text
                 Add tags
             %input{:type => "text", :name => 'point[tag][]', :value => "", :class => "tag"}
-            -#%input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
-            -#%input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
         .control-group
           = f.label :comments
           .controls
@@ -34,31 +29,3 @@
           Create Point
 
 
--#-------------------------------------------------------
--##popup-form{:style => "display:block; z-index:999; position:absolute;"}
--#  %div{:class => "popup ui-widget"}
--#    %form{:action => "/points", :class => "new_point", :id => "new_point", :method => "post", :novalidate => "novalidate", :"accept-charset" => "UTF-8"}
--#      %div{ :style =>"margin:0;padding:0;display:inline"}
--#        %input{ :name => "utf8", :type => "hidden", :value => "✓"}
--#        %input{ :name => "authenticity_token", :type => "hidden",  :value => "#{form_authenticity_token}"}
--#
--#      %header
--#        %h4{:class => "address"}
--#
--#      %section
--#        %input{ :id => "point_latitude", :name => "point[latitude]", :type => "hidden", :value => "#{@point.latitude}"}
--#        %input{ :id => "point_longitude", :name => "point[longitude]", :type => "hidden", :value => "#{@point.longitude}"}
--#        %input{ :id => "point_address", :name => "point[address]", :type => "hidden", :value => "#{@point.address}"}
--#        %div{ :class => "control-group"}
--#          %label{:for=>"point_tags"}
--#            Tags
--#          %div{ :class => "controls"}
--#            %input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
--#            %input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
--#        %div{ :class=>"control-group"}
--#          %label{:for=>"point_description"}
--#            Description
--#          %div{:class=>"controls"}
--#            %input{ :id=>"point_description", :name=>"point[description]", :size=>"30", :type=>"text"}
--#      %button{ :class=>"btn btn-primary", :onclick=>"validate_form()"}
--#        Create Point
