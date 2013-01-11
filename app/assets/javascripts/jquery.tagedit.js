@@ -131,7 +131,7 @@
 		*
 		*/
 		function inputsToList() {
-			var html = '<ul class="tagedit-list '+options.additionalListClass+'">';
+			var html = '<ul style="max-height: 65px;" class="tagedit-list '+options.additionalListClass+'">';
 			
 			elements.each(function() {
 				var element_name = $(this).attr('name').match(baseNameRegexp);

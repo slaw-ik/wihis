@@ -1,4 +1,5 @@
-= gmaps4rails(@json)
+.test
+  = gmaps4rails(@json)
 
 -##popup-form{:style => "display:block; z-index:999; position:absolute;"}
 #popup-form{:style => "display:none"}
@@ -21,7 +22,7 @@
             -#= f.text_field :tags, :class => 'tag'
             .pholder
               #def_text
-                Add tags
+                Add tags  
             %input{:type => "text", :name => 'point[tag][]', :value => "", :class => "tag"}
             -#%input{:type => "text", :name => 'point[tag][1-a]', :value => "Hazel Grouse", :class => "tag"}
             -#%input{:type => "text", :name => 'point[tag][2-a]', :value => "Test", :class => "tag"}
