@@ -13,10 +13,15 @@
 }
 
 .pholder{
-	margin-left: 10px;
+	
+  position: absolute;
+  color: gray;
+  width: 410px;
+  height: 32px;
+  #def_text{
     margin-top: 5px;
-    position: absolute;
-    color: gray;
+    margin-left: 10px;
+  }
 }
 
 .pos{
@@ -26,3 +31,11 @@
 .address{
 	width:370px;
 }
+
+.coordinates{
+  float: right;
+  margin-right: 100px;
+}
+
+
+

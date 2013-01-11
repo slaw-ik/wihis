@@ -132,7 +132,7 @@
 		*/
 		function inputsToList() {
 			var html = '<ul class="tagedit-list '+options.additionalListClass+'">';
-
+			
 			elements.each(function() {
 				var element_name = $(this).attr('name').match(baseNameRegexp);
 				if(element_name && element_name.length == 4 && (options.deleteEmptyItems == false || $(this).val().length > 0)) {
@@ -275,6 +275,9 @@
 						})
 						.focus(function() {
 							window.clearTimeout($(this).data('blurtimer'));
+							if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
+									$('.pholder').hide();	
+								}
 						});
 
 						if(options.autocompleteOptions.source != false) {

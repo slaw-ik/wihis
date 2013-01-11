@@ -60,6 +60,8 @@ $ ->
     ).success (data) ->
       $('.address h5.address').text(data)
       $('section #point_address').val(data)
+      $('.coordinates div.latitude').text(latLng.lat().toFixed(2))
+      $('.coordinates div.longitude').text(latLng.lng().toFixed(2))
 
   # Removes the overlays from the map
   clearOverlays = ->
