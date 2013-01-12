@@ -7,7 +7,7 @@ $ ->
   #  $('input.tag').tagedit(
   #    autocompleteURL: '/tags_autocomplete'
   #  )
-  markersArray = []
+  window.markersArray = []
   # On click, clear markers, place a new one, update coordinates in the form
   Gmaps.map.callback = ->
     google.maps.event.addListener(Gmaps.map.serviceObject, 'click', (event) ->
@@ -17,14 +17,10 @@ $ ->
       updateFormLocation(event.latLng)
       apply_tagging()
     )
+
     for marker in Gmaps.map.markers
       google.maps.event.addListener(marker.serviceObject, 'click', (event) ->
-        #      clearOverlays()
-        #      placeMarker(event.latLng)
-        #      get_address(event.latLng)
-        #      updateFormLocation(event.latLng)
-              apply_tagging()
-#        alert("azazaz")
+        apply_tagging()
       )
 
   # Update form attributes with given coordinates
@@ -40,7 +36,7 @@ $ ->
       map: Gmaps.map.serviceObject
       draggable: false
     )
-    markersArray.push(marker)
+    window.markersArray.push(marker)
     # Set and open infowindow
 
     infowindow = new google.maps.InfoWindow(
@@ -63,12 +59,12 @@ $ ->
       $('.coordinates div.latitude').text(latLng.lat().toFixed(6))
       $('.coordinates div.longitude').text(latLng.lng().toFixed(6))
 
-  # Removes the overlays from the map
-  clearOverlays = ->
-    if markersArray?
-      for i in markersArray
-        i.setMap(null)
-    markersArray.length = 0
+# Removes the overlays from the map
+@clearOverlays = ->
+  if window.markersArray?
+    for i in window.markersArray
+      i.setMap(null)
+  window.markersArray.length = 0
 
 
 #Form validations
@@ -105,7 +101,7 @@ $ ->
 
   $('.pholder').click ->
     $(this).hide()
-    $('.tagedit-list').trigger('click') 
+    $('.tagedit-list').trigger('click')
 
 #  alert "haha"
 

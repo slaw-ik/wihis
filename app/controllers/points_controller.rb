@@ -16,7 +16,7 @@ class PointsController < ApplicationController
 
     if @point.save
       Activity.leave(current_user.id, @point.id, data[:tags])
-      @json = build_map([@point])
+      @json = build_map(@point)
       @center = {:longitude => params[:point]["longitude"], :latitude => params[:point]["latitude"] }
 
       respond_to do |format|

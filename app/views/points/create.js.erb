@@ -1,3 +1,4 @@
-
+clearOverlays();
 Gmaps.map.addMarkers(<%= raw @json %>);
+Gmaps.map.callback();
 Gmaps.map.map.setCenter(new google.maps.LatLng(<%= @center[:latitude]%>,<%=@center[:longitude]%>));
