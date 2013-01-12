@@ -3,7 +3,7 @@ class Point < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :activities
 
-  validates :description, :presence => true
+  #validates :description, :presence => true
   #validates :tags, :uniqueness => true
 
   acts_as_gmappable :process_geocoding => true, :validation => false
@@ -29,6 +29,7 @@ class Point < ActiveRecord::Base
     n_tags = []
     ex_tags = []
     tags = []
+    description = data[:description]
 
     unless data[:'tag-n'].blank?
       new_tags = data[:"tag-n"]
@@ -49,8 +50,9 @@ class Point < ActiveRecord::Base
     data[:tags] = n_tags + ex_tags
     data.delete(:tag)
     data.delete(:'tag-n')
+    data.delete(:description)
 
-    return {:point => self.new(data), :tags => tags.join(', ')}
+    return {:point => self.new(data), :tags => "<div class='tag-cnt'>" + tags.map{|a| "<div class='tag-item'>#{a}</div>"}.join() + "</div> #{description}"}
 
     #todo
     #  need to refactor

@@ -6,6 +6,6 @@ class Activity < ActiveRecord::Base
   def self.leave(user_id, point_id, data)
     self.create(:user_id => user_id,
                 :point_id => point_id,
-                :text => "Create point and add tags: #{data}.")
+                :text => "#{data}")
   end
 end

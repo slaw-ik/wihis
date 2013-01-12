@@ -7,7 +7,7 @@
   .address
     %h5.address
       = point.address
-%h5
+-#%h5
   Description:
   = point.description
 
@@ -27,4 +27,4 @@
               = activity.created_at.strftime("%Y-%m-%d %H:%M")
         %td{:class => "cnt"}
           .cont
-            = activity.text
+            = raw activity.text
