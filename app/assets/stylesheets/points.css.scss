@@ -4,35 +4,34 @@
 
 .popup {
   min-height: 350px;
-  min-width: 500px; 
+  min-width: 500px;
   max-height: 350px;
   max-width: 500px;
-  input{
+  input {
     width: 400px;
   }
 }
 
-.pholder{
-	
+.pholder {
   position: absolute;
   color: gray;
   width: 410px;
   height: 32px;
-  #def_text{
+  #def_text {
     margin-top: 5px;
     margin-left: 10px;
   }
 }
 
-.pos{
-	margin-left: 400px;
+.pos {
+  margin-left: 400px;
 }
 
-.address{
-	width:370px;
+.address {
+  width: 370px;
 }
 
-.coordinates{
+.coordinates {
   float: right;
   margin-right: 16px;
 }
@@ -42,6 +41,34 @@
 }
 
 .tagedit-list {
-  width:486px;
+  width: 486px;
 }
 
+#activities {
+  width: 495px;
+  height: 150px;
+  border: 1px solid #C6C6C6;
+  table {
+    width: 100%;
+    tr.activity {
+      td.log {
+        background-color: #add8e6;
+        .login {
+          width: 130px;
+          font-size: 12px;
+          font-weight: bold;
+          .date {
+            font-size: 10px;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+    td.cnt {
+      background-color: #e0ffff;
+      .cont {
+        margin-left: 10px;
+      }
+    }
+  }
+}

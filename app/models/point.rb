@@ -35,7 +35,7 @@ class Point < ActiveRecord::Base
       new_tags.each do |tag|
         n_tags << Tag.new(:name => tag)
       end
-      tags += n_tags
+      tags += new_tags
     end
 
     unless data[:tag].blank?
@@ -55,7 +55,6 @@ class Point < ActiveRecord::Base
     #todo
     #  need to refactor
     #  need some tests
-
 
   end
 

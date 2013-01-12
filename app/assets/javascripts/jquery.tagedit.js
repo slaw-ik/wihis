@@ -195,7 +195,7 @@
 									html += '<span dir="'+options.direction+'">' + $(this).val() + '</span>';
 //									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName + '[0-a]';
 									var name = oldValue? baseName + '['+id+options.addedPostfix+']' : baseName.slice(0, (baseName.length-1))+"-n]" + '[]';
-                                    console.log(baseName)
+//                                    console.log(baseName)
 									html += '<input type="hidden" name="'+name+'" value="'+$(this).val()+'" />';
 									html += '<a class="tagedit-close" title="'+options.texts.removeLinkTitle+'">x</a>';
 									html += '</li>';
