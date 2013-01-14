@@ -178,7 +178,7 @@
 						// Event ist triggert in case of choosing an item from the autocomplete, or finish the input
 						$(this).bind('transformToTag', function(event, id) {
 							var oldValue = (typeof id != 'undefined' && id.length > 0);
-
+							$(".btn").removeAttr("disabled");
 							var checkAutocomplete = oldValue == true? false : true;
 							// check if the Value ist new
 							var isNewResult = isNew($(this).val(), checkAutocomplete);
@@ -222,6 +222,7 @@
 										elementToRemove.fadeOut(options.animSpeed, function() {elementToRemove.remove();})
 										if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
 											$('.pholder').show();
+											$(".btn").attr("disabled","disabled");
 												
 										}
 										event.preventDefault();
@@ -257,6 +258,7 @@
 							if (e.type == 'paste'){
 								setTimeout(function(){
 									that.trigger('transformToTag');
+									
 								}, 1);
 							}
 						})
@@ -282,13 +284,14 @@
 						.focus(function() {
 							window.clearTimeout($(this).data('blurtimer'));
 							if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
-									$('.pholder').hide();	
+									$('.pholder').hide();
+									$(".btn").attr("disabled", "disabled");	
 								}
 
 						});
 
 						if(options.autocompleteOptions.source != false) {
-							$(this).autocomplete(options.autocompleteOptions);
+							$(this).autocomplete(options.autocompleteOptions);	
 						}
 					})
 				.end()
