@@ -1,30 +1,31 @@
-%header
-  .coordinates
-    .latitude
-      = point.latitude
-    .longitude
-      = point.longitude
-  .address
-    %h5.address
-      = point.address
--#%h5
-  Description:
-  = point.description
+#infowindow
+  %header
+    .coordinates
+      .latitude
+        = point.latitude
+      .longitude
+        = point.longitude
+    .address
+      %h5.address
+        = point.address
+  -#%h5
+    Description:
+    = point.description
 
-.control-group
-  .controls
-    - point.tags.each do |tag|
-      %input{:type => "text", :name => "point[tag][#{tag.id}]", :value => "#{tag.name}", :class => "tag"}
+  .control-group
+    .controls
+      - point.tags.each do |tag|
+        %input{:type => "text", :name => "point[tag][#{tag.id}]", :value => "#{tag.name}", :class => "tag"}
 
-#activities
-  - point.activities.each do |activity|
-    %table
-      %tr.activity
-        %td{:width => 130, :class => "log"}
-          .login
-            = activity.user.email
-            .date
-              = activity.created_at.strftime("%Y-%m-%d %H:%M")
-        %td{:class => "cnt"}
-          .cont
-            = raw activity.text
+  #activities
+    - point.activities.each do |activity|
+      %table
+        %tr.activity
+          %td{:width => 130, :class => "log"}
+            .login
+              = activity.user.email
+              .date
+                = activity.created_at.strftime("%Y-%m-%d %H:%M")
+          %td{:class => "cnt"}
+            .cont
+              = build_activity activity.text

@@ -3,18 +3,19 @@ class Point < ActiveRecord::Base
   has_and_belongs_to_many :tags
   has_many :activities
 
-  #validates :description, :presence => true
-  #validates :tags, :uniqueness => true
-
+  #=================== Gmaps4Rails===================================
   acts_as_gmappable :process_geocoding => true, :validation => false
   before_create :address_presence
+  #==================================================================
 
+  #=================== Geocoder =====================================
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :reverse_geocode
+  #==================================================================
 
   attr_accessible :address, :gmaps, :description, :latitude, :longitude, :no_geocode, :tags
   attr_accessor :no_geocode
 
-  reverse_geocoded_by :latitude, :longitude
-  after_validation :reverse_geocode
 
   def gmaps4rails_address
     address
@@ -29,6 +30,7 @@ class Point < ActiveRecord::Base
     n_tags = []
     ex_tags = []
     tags = []
+    out_tags =[]
     description = data[:description]
 
     unless data[:'tag-n'].blank?
@@ -52,7 +54,8 @@ class Point < ActiveRecord::Base
     data.delete(:'tag-n')
     data.delete(:description)
 
-    return {:point => self.new(data), :tags => "<div class='tag-cnt'>" + tags.map{|a| "<div class='tag-item'>#{a}</div>"}.join() + "</div> #{description}"}
+    #return {:point => self.new(data), :tags => "<div class='tag-cnt'>" + tags.map{|a| "<div class='tag-item'>#{a}</div>"}.join() + "</div> #{description}"}
+    return {:point => self.new(data), :tags => {:tags => tags, :desc => description}}
 
     #todo
     #  need to refactor
