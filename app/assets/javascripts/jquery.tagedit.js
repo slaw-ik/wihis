@@ -221,7 +221,9 @@
 										var elementToRemove = elements.find('li.tagedit-listelement-old').last();
 										elementToRemove.fadeOut(options.animSpeed, function() {elementToRemove.remove();})
 										if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
-											$('.pholder').show();	
+											$('.pholder').show();
+											$(".btn").attr("disabled","disabled");	
+												
 										}
 										event.preventDefault();
 										return false;
@@ -242,6 +244,9 @@
 							if($.inArray(code, options.breakKeyCodes) > -1) {
 								if($(this).val().length > 0 && $('ul.ui-autocomplete #ui-active-menuitem').length == 0) {
 									$(this).trigger('transformToTag');
+									if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() != 0 ) {
+								    	$(".btn").removeAttr("disabled");
+								    }			
 								}
 							event.preventDefault();
 							return false;
@@ -260,8 +265,10 @@
 							if($(this).val().length == 0) {
 								// disable the field to prevent sending with the form
 								if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
-									$('.pholder').show();	
+									$('.pholder').show();
+									$(".btn").attr("disabled","disabled");	
 								}
+
 								
 								
 								$(this).attr('disabled', 'disabled').addClass('tagedit-input-disabled');
@@ -278,6 +285,7 @@
 							if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
 									$('.pholder').hide();	
 								}
+
 						});
 
 						if(options.autocompleteOptions.source != false) {
@@ -291,7 +299,8 @@
 							$(event.target).parent().fadeOut(options.animSpeed, function() {
 								$(event.target).parent().remove();
 								if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
-									$('.pholder').show();	
+									$('.pholder').show();
+								    $(".btn").attr("disabled","disabled");			
 								}
 								});
 							break;
