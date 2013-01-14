@@ -222,7 +222,6 @@
 										elementToRemove.fadeOut(options.animSpeed, function() {elementToRemove.remove();})
 										if ( $( 'ul.tagedit-list li.tagedit-listelement-old').size() == 0 ) {
 											$('.pholder').show();
-											$(".btn").attr("disabled","disabled");	
 												
 										}
 										event.preventDefault();
